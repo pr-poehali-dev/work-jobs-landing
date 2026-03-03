@@ -220,7 +220,7 @@ const Index = () => {
       </section>
 
       {/* ПОЧЕМУ РАБОТАЕТ */}
-      <section className="py-16 md:py-24 px-6" style={{ background: 'hsl(220 20% 96%)' }}>
+      <section className="py-16 md:py-24 px-6 bg-white border-t border-border">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
             <SectionLabel>Наше решение</SectionLabel>
@@ -321,7 +321,7 @@ const Index = () => {
       </section>
 
       {/* ГАРАНТИИ */}
-      <section style={{ background: 'hsl(220 20% 96%)' }} className="py-10 px-6 border-t border-border">
+      <section className="py-10 px-6 bg-white border-t border-border">
         <div className="max-w-4xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-center gap-8">
             {[
