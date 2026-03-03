@@ -3,209 +3,249 @@ import Icon from "@/components/ui/icon";
 const TELEGRAM_URL = "#telegram";
 const VK_URL = "#vk";
 
-const problems = [
+const IMG_DAD_DESK = "https://cdn.poehali.dev/projects/1b9f9f93-e7be-4d41-af5d-d8e558350a0f/files/45b11f5a-f8dc-4072-a231-900308f570af.jpg";
+const IMG_DAD_WORRY = "https://cdn.poehali.dev/projects/1b9f9f93-e7be-4d41-af5d-d8e558350a0f/files/461035ef-dbab-46fd-ac91-c3e5b567897d.jpg";
+const IMG_DAD_LAPTOP = "https://cdn.poehali.dev/projects/1b9f9f93-e7be-4d41-af5d-d8e558350a0f/files/d7562ec8-6e8f-4060-ba9d-fdb88caed1bd.jpg";
+const IMG_FAMILY = "https://cdn.poehali.dev/projects/1b9f9f93-e7be-4d41-af5d-d8e558350a0f/files/f48d509d-12cb-4bb3-9f0c-35faa4a04d07.jpg";
+
+const audiences = [
   {
-    icon: "Clock",
-    title: "Нет времени",
-    text: "После работы и ужина остаётся от силы час. Кажется, что дополнительный заработок просто невозможен.",
+    img: IMG_DAD_DESK,
+    name: "Алексей, 38 лет",
+    role: "Инженер на заводе",
+    quote: "Хочу дать семье больше, но после смены нет сил даже думать о подработках",
   },
   {
-    icon: "TrendingDown",
-    title: "Страх прогореть",
-    text: "Вкладывать деньги в «своё дело» страшно. Потеряешь — и семья пострадает. Рисковать нельзя.",
+    img: IMG_DAD_WORRY,
+    name: "Максим, 41 год",
+    role: "Водитель-дальнобойщик",
+    quote: "Боюсь рисковать — потеряю вложенное, семья не поймёт",
   },
   {
-    icon: "BriefcaseBusiness",
-    title: "Основная работа страдает",
-    text: "Подработки, которые мешают на основном месте — не вариант. Нужно что-то параллельное и незаметное.",
+    img: IMG_DAD_LAPTOP,
+    name: "Сергей, 35 лет",
+    role: "Менеджер в офисе",
+    quote: "Пробовал онлайн-бизнес, слил деньги. Теперь ищу только проверенное",
   },
 ];
 
-const benefits = [
+const stats = [
+  { num: "17+", label: "подработок", desc: "Только реально работающие варианты" },
+  { num: "0 ₽", label: "вложений", desc: "Большинство без стартового капитала" },
+  { num: "2–3 ч", label: "в день", desc: "Для занятых пап с плотным графиком" },
+  { num: "3 000+", label: "пап взяли", desc: "Реальные люди, реальные результаты" },
+];
+
+const whyPoints = [
   {
-    num: "17+",
-    title: "Проверенных способов",
-    text: "Только реально работающие варианты без воды и фантастики",
+    icon: "CheckCircle2",
+    title: "Проверено практикой",
+    text: "Каждый способ прошёл проверку реальными работающими папами, а не теоретиками",
   },
   {
-    num: "0 ₽",
-    title: "Стартовых вложений",
-    text: "Большинство подработок не требуют никаких первоначальных затрат",
+    icon: "Shield",
+    title: "Ноль финансового риска",
+    text: "Подборка специально отобрана: варианты без вложений или с минимальным риском",
   },
   {
-    num: "2–3 ч",
-    title: "В день достаточно",
-    text: "Все варианты рассчитаны на занятых пап с плотным графиком",
+    icon: "Clock",
+    title: "Не мешает основной работе",
+    text: "Все способы рассчитаны на 2–3 часа вечером или в выходной день",
   },
   {
-    num: "≠ 0",
-    title: "Риска потерять деньги",
-    text: "Подборка специально отобрана по критерию минимального финансового риска",
+    icon: "Heart",
+    title: "Семья не пострадает",
+    text: "Только те варианты, которые не крадут время у детей и жены",
   },
 ];
 
 const steps = [
-  { num: "01", text: "Нажимаешь на кнопку и переходишь в удобную соцсеть" },
-  { num: "02", text: "Получаешь все 17+ подработок в удобном формате" },
-  { num: "03", text: "Выбираешь подходящий вариант и начинаешь уже сегодня" },
+  { num: "1", title: "Выбери канал", text: "Нажми на кнопку Telegram или ВКонтакте" },
+  { num: "2", title: "Получи подборку", text: "Все 17+ подработок придут тебе сразу" },
+  { num: "3", title: "Начни сегодня", text: "Выбери подходящее и сделай первый шаг" },
 ];
+
+const SectionLabel = ({ children }: { children: React.ReactNode }) => (
+  <div className="flex items-center justify-center gap-3 mb-4">
+    <div className="h-px flex-1 max-w-12" style={{ background: 'hsl(var(--accent))', opacity: 0.6 }} />
+    <span className="badge-pill">{children}</span>
+    <div className="h-px flex-1 max-w-12" style={{ background: 'hsl(var(--accent))', opacity: 0.6 }} />
+  </div>
+);
 
 const Index = () => {
   return (
-    <div className="font-golos bg-white text-[hsl(var(--foreground))] min-h-screen overflow-x-hidden">
+    <div className="font-montserrat bg-background text-foreground min-h-screen overflow-x-hidden">
+
+      {/* TOP BAR */}
+      <div style={{ background: 'hsl(var(--primary))' }} className="py-2 px-6">
+        <p className="text-center text-white/70 text-xs tracking-wide uppercase">
+          Бесплатная подборка · Только для работающих пап · Мгновенный доступ
+        </p>
+      </div>
 
       {/* HERO */}
-      <section className="relative bg-[hsl(var(--primary))] text-white overflow-hidden">
-        <div className="absolute inset-0 opacity-5 pointer-events-none">
-          <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-white translate-x-1/3 -translate-y-1/3" />
-          <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-white -translate-x-1/3 translate-y-1/3" />
-        </div>
-
-        <div className="relative max-w-3xl mx-auto px-6 py-20 md:py-28 text-center">
-          <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-2 text-sm font-medium mb-8 animate-fade-in">
-            <Icon name="Gift" size={16} className="text-[hsl(var(--accent))]" />
-            <span>Бесплатная подборка для работающих пап</span>
+      <section
+        className="relative overflow-hidden"
+        style={{ background: 'linear-gradient(135deg, hsl(218 68% 18%) 0%, hsl(218 68% 28%) 100%)' }}
+      >
+        <div
+          className="absolute inset-y-0 right-0 w-1/2 opacity-10 pointer-events-none"
+          style={{ background: 'linear-gradient(135deg, transparent 40%, hsl(var(--accent)) 100%)' }}
+        />
+        <div className="relative max-w-5xl mx-auto px-6 py-16 md:py-24 grid md:grid-cols-2 gap-10 items-center">
+          <div className="animate-fade-up">
+            <div className="mb-5">
+              <span className="badge-pill">Бесплатно</span>
+            </div>
+            <h1 className="font-oswald text-4xl md:text-5xl font-bold uppercase leading-tight text-white mb-5">
+              Более{" "}
+              <span style={{ color: 'hsl(var(--accent))' }}>17 проверенных</span>
+              {" "}подработок для работающих пап
+            </h1>
+            <p className="text-white/70 text-base leading-relaxed mb-8 max-w-md">
+              Без риска потерять деньги. Без ущерба для семьи. Без отрыва от основной работы.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 mb-6">
+              <a href={TELEGRAM_URL} className="btn-primary text-sm">
+                <Icon name="Send" size={18} />
+                Получить в Telegram
+              </a>
+              <a href={VK_URL} className="btn-outline text-sm">
+                <Icon name="Users" size={18} />
+                Получить ВКонтакте
+              </a>
+            </div>
+            <div className="flex items-center gap-2 text-white/50 text-xs">
+              <Icon name="Users" size={14} />
+              <span>Уже скачали более 3 000 пап</span>
+            </div>
           </div>
 
-          <h1 className="font-oswald text-4xl md:text-6xl font-bold uppercase leading-tight mb-6 animate-fade-up">
-            Более <span className="text-[hsl(var(--accent))]">17 проверенных</span>{" "}
-            подработок для работающих пап
-          </h1>
-
-          <p className="text-lg md:text-xl text-white/75 max-w-2xl mx-auto mb-10 animate-fade-up delay-200">
-            Без риска потерь, без ущерба для семьи и без отрыва от основной работы.
-            Реальные способы увеличить доход уже в этом месяце.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up delay-300">
-            <a
-              href={TELEGRAM_URL}
-              className="inline-flex items-center justify-center gap-3 bg-[hsl(var(--accent))] hover:bg-orange-500 text-white font-semibold text-lg px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200"
+          <div className="relative hidden md:block animate-fade-in delay-300">
+            <div
+              className="absolute inset-0 rounded-lg pointer-events-none z-10"
+              style={{ background: 'linear-gradient(to top, hsl(218 68% 18%) 0%, transparent 40%)' }}
+            />
+            <img
+              src={IMG_FAMILY}
+              alt="Счастливая семья"
+              className="rounded-lg w-full object-cover shadow-2xl"
+              style={{ height: '420px', objectPosition: 'center top' }}
+            />
+            <div
+              className="absolute bottom-4 left-4 right-4 rounded border px-4 py-3 z-20"
+              style={{ background: 'rgba(0,0,0,0.75)', borderColor: 'hsl(var(--accent))' }}
             >
-              <Icon name="Send" size={22} />
-              Получить в Telegram
-            </a>
-            <a
-              href={VK_URL}
-              className="inline-flex items-center justify-center gap-3 bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold text-lg px-8 py-4 rounded-2xl transition-all duration-200"
-            >
-              <Icon name="Users" size={22} />
-              Получить ВКонтакте
-            </a>
-          </div>
-
-          <p className="mt-6 text-white/50 text-sm animate-fade-in delay-500">
-            Уже более 3 000 пап получили подборку
-          </p>
-        </div>
-      </section>
-
-      {/* ПРОБЛЕМА */}
-      <section className="py-20 md:py-28 px-6">
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-14">
-            <span className="inline-block bg-red-50 text-red-500 font-semibold text-sm uppercase tracking-widest px-4 py-2 rounded-full mb-4">
-              Узнаёшь себя?
-            </span>
-            <h2 className="font-oswald text-3xl md:text-5xl font-bold uppercase text-[hsl(var(--primary))]">
-              Хочешь зарабатывать больше, но…
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {problems.map((p, i) => (
-              <div
-                key={i}
-                className="bg-gray-50 rounded-3xl p-8 border border-gray-100 hover:border-orange-200 hover:shadow-md transition-all duration-300"
-              >
-                <div className="w-12 h-12 bg-red-50 rounded-2xl flex items-center justify-center mb-5">
-                  <Icon name={p.icon} fallback="AlertCircle" size={24} className="text-red-400" />
-                </div>
-                <h3 className="font-semibold text-lg text-[hsl(var(--primary))] mb-2">
-                  {p.title}
-                </h3>
-                <p className="text-[hsl(var(--muted-foreground))] text-sm leading-relaxed">
-                  {p.text}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-14 text-center">
-            <div className="inline-flex items-center gap-3 bg-[hsl(var(--primary))]/5 border border-[hsl(var(--primary))]/10 rounded-2xl px-8 py-5">
-              <Icon name="Lightbulb" size={24} className="text-[hsl(var(--accent))]" />
-              <p className="text-[hsl(var(--primary))] font-medium text-lg">
-                Мы нашли решение — и оно работает для занятых пап
+              <p className="text-white text-sm font-semibold">
+                «Нашёл 2 подработки. Уже через месяц дал семье то, о чём давно мечтали»
               </p>
+              <p className="text-white/50 text-xs mt-1">— Дмитрий, 39 лет, Екатеринбург</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* РЕШЕНИЕ */}
-      <section className="py-20 md:py-28 px-6 bg-[hsl(var(--primary))] text-white relative overflow-hidden">
-        <div className="absolute right-0 top-0 w-80 h-80 bg-white/5 rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-        <div className="absolute left-0 bottom-0 w-56 h-56 bg-white/5 rounded-full -translate-x-1/2 translate-y-1/2 pointer-events-none" />
-
-        <div className="relative max-w-3xl mx-auto text-center">
-          <span className="inline-block bg-white/10 border border-white/20 font-semibold text-sm uppercase tracking-widest px-4 py-2 rounded-full mb-6">
-            Решение
-          </span>
-          <h2 className="font-oswald text-3xl md:text-5xl font-bold uppercase leading-tight mb-8">
-            Подборка из <span className="text-[hsl(var(--accent))]">17+</span> подработок,{" "}
-            которые реально работают
-          </h2>
-          <p className="text-white/75 text-lg max-w-xl mx-auto mb-12 leading-relaxed">
-            Каждый способ проверен на практике работающими папами. Никакой теории — только
-            конкретные шаги, с которых можно начать уже сегодня вечером.
-          </p>
-
-          <div className="grid md:grid-cols-3 gap-4 text-left">
-            {steps.map((s, i) => (
-              <div
-                key={i}
-                className="bg-white/10 border border-white/15 rounded-3xl p-6 hover:bg-white/15 transition-colors"
-              >
-                <div className="font-oswald text-4xl font-bold text-[hsl(var(--accent))] mb-3">
-                  {s.num}
-                </div>
-                <p className="text-white/85 leading-relaxed">{s.text}</p>
+      {/* STATS STRIP */}
+      <div style={{ background: 'hsl(var(--accent))' }}>
+        <div className="max-w-5xl mx-auto px-6 py-5 grid grid-cols-2 md:grid-cols-4 gap-4">
+          {stats.map((b, i) => (
+            <div key={i} className="text-center">
+              <div className="font-oswald text-2xl md:text-3xl font-bold" style={{ color: 'hsl(var(--primary))' }}>
+                {b.num}
               </div>
-            ))}
-          </div>
+              <div className="text-xs font-bold uppercase tracking-wide text-white/90">{b.label}</div>
+              <div className="text-xs text-white/70 mt-0.5 hidden md:block">{b.desc}</div>
+            </div>
+          ))}
         </div>
-      </section>
+      </div>
 
-      {/* ПРЕИМУЩЕСТВА */}
-      <section className="py-20 md:py-28 px-6 bg-gray-50">
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-14">
-            <span className="inline-block bg-orange-50 text-orange-500 font-semibold text-sm uppercase tracking-widest px-4 py-2 rounded-full mb-4">
-              Почему это работает
-            </span>
-            <h2 className="font-oswald text-3xl md:text-5xl font-bold uppercase text-[hsl(var(--primary))]">
-              Что внутри подборки
+      {/* АУДИТОРИЯ — портреты ЦА */}
+      <section className="py-16 md:py-24 px-6 bg-white">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <SectionLabel>Узнаёшь себя?</SectionLabel>
+            <h2 className="font-oswald text-3xl md:text-4xl font-bold uppercase" style={{ color: 'hsl(var(--primary))' }}>
+              Эта подборка создана для тебя, если…
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            {benefits.map((b, i) => (
-              <div
-                key={i}
-                className="bg-white rounded-3xl p-8 border border-gray-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 flex gap-6 items-start"
-              >
-                <div className="flex-shrink-0">
-                  <div className="font-oswald text-3xl font-bold text-[hsl(var(--accent))]">
-                    {b.num}
+          <div className="grid md:grid-cols-3 gap-6">
+            {audiences.map((a, i) => (
+              <div key={i} className="card-business animate-fade-up" style={{ animationDelay: `${i * 0.15}s` }}>
+                <div className="relative mb-5 overflow-hidden rounded">
+                  <img
+                    src={a.img}
+                    alt={a.name}
+                    className="w-full object-cover"
+                    style={{ height: '220px', objectPosition: 'center top' }}
+                  />
+                  <div
+                    className="absolute bottom-0 left-0 right-0 h-16"
+                    style={{ background: 'linear-gradient(to top, white, transparent)' }}
+                  />
+                </div>
+                <div className="flex items-center gap-2 mb-3">
+                  <div
+                    className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0"
+                    style={{ background: 'hsl(var(--primary))' }}
+                  >
+                    <Icon name="User" size={14} className="text-white" />
+                  </div>
+                  <div>
+                    <span className="font-bold text-sm block" style={{ color: 'hsl(var(--primary))' }}>{a.name}</span>
+                    <span className="text-xs text-muted-foreground">{a.role}</span>
                   </div>
                 </div>
+                <p
+                  className="text-sm text-muted-foreground leading-relaxed border-l-2 pl-3 italic"
+                  style={{ borderColor: 'hsl(var(--accent))' }}
+                >
+                  «{a.quote}»
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div
+            className="mt-10 rounded border-l-4 p-6 text-center"
+            style={{ background: 'hsl(218 68% 22%)', borderColor: 'hsl(var(--accent))' }}
+          >
+            <p className="text-white font-semibold text-lg">
+              Если хоть один портрет — это ты, значит подборка точно подойдёт
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ПОЧЕМУ РАБОТАЕТ */}
+      <section className="py-16 md:py-24 px-6" style={{ background: 'hsl(220 20% 96%)' }}>
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <SectionLabel>Наше решение</SectionLabel>
+            <h2 className="font-oswald text-3xl md:text-4xl font-bold uppercase" style={{ color: 'hsl(var(--primary))' }}>
+              Почему эта подборка работает
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-5">
+            {whyPoints.map((p, i) => (
+              <div
+                key={i}
+                className="flex gap-4 bg-white rounded p-6 border border-border hover:shadow-md transition-shadow"
+              >
+                <div
+                  className="flex-shrink-0 w-12 h-12 rounded flex items-center justify-center"
+                  style={{ background: 'hsl(var(--primary))' }}
+                >
+                  <Icon name={p.icon} fallback="CheckCircle2" size={22} className="text-white" />
+                </div>
                 <div>
-                  <h3 className="font-bold text-lg text-[hsl(var(--primary))] mb-2">
-                    {b.title}
+                  <h3 className="font-bold text-base mb-1" style={{ color: 'hsl(var(--primary))' }}>
+                    {p.title}
                   </h3>
-                  <p className="text-[hsl(var(--muted-foreground))] text-sm leading-relaxed">
-                    {b.text}
-                  </p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{p.text}</p>
                 </div>
               </div>
             ))}
@@ -213,58 +253,101 @@ const Index = () => {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-20 md:py-28 px-6">
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="font-oswald text-3xl md:text-5xl font-bold uppercase text-[hsl(var(--primary))] mb-4">
-            Получи подборку{" "}
-            <span className="text-[hsl(var(--accent))]">бесплатно</span>
-          </h2>
-          <p className="text-[hsl(var(--muted-foreground))] text-lg mb-10">
-            Выбери удобную соцсеть — и через минуту у тебя будет весь список
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href={TELEGRAM_URL}
-              className="group inline-flex items-center justify-center gap-3 bg-[hsl(var(--accent))] hover:bg-orange-500 text-white font-bold text-lg px-10 py-5 rounded-2xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200"
-            >
-              <Icon name="Send" size={24} />
-              Telegram
-              <Icon name="ArrowRight" size={18} className="group-hover:translate-x-1 transition-transform" />
-            </a>
-            <a
-              href={VK_URL}
-              className="group inline-flex items-center justify-center gap-3 bg-[hsl(var(--primary))] hover:bg-blue-900 text-white font-bold text-lg px-10 py-5 rounded-2xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200"
-            >
-              <Icon name="Users" size={24} />
-              ВКонтакте
-              <Icon name="ArrowRight" size={18} className="group-hover:translate-x-1 transition-transform" />
-            </a>
+      {/* КАК ПОЛУЧИТЬ */}
+      <section className="py-16 md:py-24 px-6 bg-white">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <SectionLabel>Три шага</SectionLabel>
+            <h2 className="font-oswald text-3xl md:text-4xl font-bold uppercase" style={{ color: 'hsl(var(--primary))' }}>
+              Как получить подборку
+            </h2>
           </div>
 
-          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-6 text-sm text-[hsl(var(--muted-foreground))]">
-            <span className="flex items-center gap-2">
-              <Icon name="ShieldCheck" size={16} className="text-green-500" />
-              Полностью бесплатно
-            </span>
-            <span className="flex items-center gap-2">
-              <Icon name="Zap" size={16} className="text-yellow-500" />
-              Доступ мгновенно
-            </span>
-            <span className="flex items-center gap-2">
-              <Icon name="Lock" size={16} className="text-blue-400" />
-              Без спама
-            </span>
+          <div className="grid md:grid-cols-3 gap-6 mb-12">
+            {steps.map((s, i) => (
+              <div key={i} className="text-center animate-fade-up" style={{ animationDelay: `${i * 0.15}s` }}>
+                <div
+                  className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4 font-oswald text-xl font-bold text-white"
+                  style={{ background: 'hsl(var(--primary))' }}
+                >
+                  {s.num}
+                </div>
+                <h3 className="font-bold text-base mb-2" style={{ color: 'hsl(var(--primary))' }}>
+                  {s.title}
+                </h3>
+                <p className="text-sm text-muted-foreground">{s.text}</p>
+              </div>
+            ))}
+          </div>
+
+          <div
+            className="rounded overflow-hidden grid md:grid-cols-2"
+            style={{ background: 'hsl(var(--primary))' }}
+          >
+            <div className="p-8 md:p-10 flex flex-col justify-center">
+              <h3 className="font-oswald text-2xl md:text-3xl font-bold uppercase text-white leading-tight mb-4">
+                Начни зарабатывать{" "}
+                <span style={{ color: 'hsl(var(--accent))' }}>больше</span>{" "}
+                уже этим вечером
+              </h3>
+              <p className="text-white/70 text-sm mb-6 leading-relaxed">
+                Выбери любой удобный способ — через минуту у тебя будут все 17+ подработок
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <a href={TELEGRAM_URL} className="btn-primary text-sm">
+                  <Icon name="Send" size={17} />
+                  Telegram
+                </a>
+                <a href={VK_URL} className="btn-outline text-sm">
+                  <Icon name="Users" size={17} />
+                  ВКонтакте
+                </a>
+              </div>
+            </div>
+            <div className="relative hidden md:block">
+              <img
+                src={IMG_DAD_LAPTOP}
+                alt="Папа работает за ноутбуком"
+                className="w-full h-full object-cover"
+                style={{ minHeight: '300px' }}
+              />
+              <div
+                className="absolute inset-0"
+                style={{ background: 'linear-gradient(to right, hsl(var(--primary)) 0%, transparent 40%)' }}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ГАРАНТИИ */}
+      <section style={{ background: 'hsl(220 20% 96%)' }} className="py-10 px-6 border-t border-border">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-8">
+            {[
+              { icon: "ShieldCheck", text: "Полностью бесплатно" },
+              { icon: "Zap", text: "Мгновенный доступ" },
+              { icon: "Lock", text: "Без спама" },
+              { icon: "Star", text: "3 000+ довольных пап" },
+            ].map((g, i) => (
+              <div key={i} className="flex items-center gap-2">
+                <Icon name={g.icon} fallback="Check" size={18} style={{ color: 'hsl(var(--accent))' }} />
+                <span className="text-sm font-semibold" style={{ color: 'hsl(var(--primary))' }}>{g.text}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer className="py-8 px-6 border-t border-gray-100 text-center">
-        <p className="text-[hsl(var(--muted-foreground))] text-sm">
-          © 2026 · Подработки для работающих пап
-        </p>
+      <footer style={{ background: 'hsl(var(--primary))' }} className="py-6 px-6">
+        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
+          <p className="text-white/50 text-xs">© 2026 · Подработки для работающих пап</p>
+          <div className="flex gap-4">
+            <a href={TELEGRAM_URL} className="text-white/50 hover:text-white text-xs transition-colors">Telegram</a>
+            <a href={VK_URL} className="text-white/50 hover:text-white text-xs transition-colors">ВКонтакте</a>
+          </div>
+        </div>
       </footer>
     </div>
   );
